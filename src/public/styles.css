@@ -272,7 +272,9 @@ ul.providers {
   width: 100%;
 }
 
-.main-wrapper .content form button {
+.main-wrapper .content form button,
+.main-wrapper .content .button {
+  text-decoration: none;
   width: 100%;
   height: 40px;
   display: flex;
@@ -285,8 +287,10 @@ ul.providers {
   color: #fff;
   background: #7159c1;
   margin-top: 5px;
+  margin-bottom: 5px;
 }
 
-.main-wrapper .content form button:hover {
+.main-wrapper .content form button:hover,
+.main-wrapper .content .button:hover {
   background: #634dac;
 }

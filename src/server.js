@@ -6,6 +6,7 @@ const RedisStore = require('connect-redis')(session)
 const nunjucks = require('nunjucks')
 const path = require('path')
 const flash = require('connect-flash')
+const dateFilter = require('nunjucks-date-filter')
 
 class App {
   constructor () {
@@ -43,11 +44,13 @@ class App {
   }
 
   views () {
-    nunjucks.configure(path.resolve(__dirname, 'app', 'views'), {
-      watch: this.isDev,
-      express: this.express,
-      autoescape: true
-    })
+    nunjucks
+      .configure(path.resolve(__dirname, 'app', 'views'), {
+        watch: this.isDev,
+        express: this.express,
+        autoescape: true
+      })
+      .addFilter('date', dateFilter)
 
     this.express.use(express.static(path.resolve(__dirname, 'public')))
     this.express.use(
