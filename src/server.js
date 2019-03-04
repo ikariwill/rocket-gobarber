@@ -5,6 +5,7 @@ const client = redis.createClient()
 const RedisStore = require('connect-redis')(session)
 const nunjucks = require('nunjucks')
 const path = require('path')
+const flash = require('connect-flash')
 
 class App {
   constructor () {
@@ -18,6 +19,7 @@ class App {
 
   middlewares () {
     this.express.use(express.urlencoded({ extended: false }))
+    this.express.use(flash())
     this.express.use(
       session({
         name: 'root',
@@ -48,6 +50,10 @@ class App {
     })
 
     this.express.use(express.static(path.resolve(__dirname, 'public')))
+    this.express.use(
+      '/images',
+      express.static(path.resolve(__dirname, 'public', 'images'))
+    )
     this.express.set('view engine', 'njk')
   }
 
